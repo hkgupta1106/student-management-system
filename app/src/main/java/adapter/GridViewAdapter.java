@@ -21,10 +21,10 @@ public class GridViewAdapter extends BaseAdapter {
 
     private final Context context;
     private final ArrayList<StudentDetails> studentdeatails;
-    private TextView tvName,tvSchoolName,tvEmail,tvGender,tvRollNo;
+    private TextView tvName, tvSchoolName, tvEmail, tvGender, tvRollNo;
+
     /**
-     *
-     * @param context context
+     * @param context         context
      * @param studentdeatails arraylist object
      */
     public GridViewAdapter(final Context context, final ArrayList<StudentDetails> studentdeatails) {

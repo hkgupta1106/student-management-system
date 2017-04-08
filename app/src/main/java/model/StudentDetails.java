@@ -4,75 +4,150 @@ package model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * student details model class
+ */
 public class StudentDetails implements Parcelable {
 
-    private String name, email, gender,schoolName, rollNo;
+    public static final Creator<StudentDetails> CREATOR = new Creator<StudentDetails>() {
+        @Override
+        public StudentDetails createFromParcel(final Parcel in) {
+            return new StudentDetails(in);
+        }
 
+        @Override
+        public StudentDetails[] newArray(final int size) {
+            return new StudentDetails[size];
+        }
+    };
+
+    private String name, email, gender, schoolName, rollNo;
+
+    /**
+     * default constructor
+     */
+    public StudentDetails() {
+
+    }
+
+    /**
+     *
+     * @param name name
+     * @param email email
+     * @param schoolName school name
+     * @param gender gender
+     * @param rollNo roll no
+     */
+
+    public StudentDetails(final String name, final String email, final String schoolName, final String gender, final String rollNo) {
+        this.name = name;
+        this.email = email;
+        this.schoolName = schoolName;
+        this.gender = gender;
+        this.rollNo = rollNo;
+    }
+
+    /**
+     *
+     * @param in constructor
+     */
+    protected StudentDetails(final Parcel in) {
+        name = in.readString();
+        email = in.readString();
+        schoolName = in.readString();
+        gender = in.readString();
+        rollNo = in.readString();
+    }
+
+    /**
+     *
+     * @return getting roll no
+     */
     public String getRollNo() {
         return rollNo;
     }
 
-    public void setRollNo(String rollNo) {
+    /**
+     *
+     * @param rollNo setting roll no
+     */
+    public void setRollNo(final String rollNo) {
         this.rollNo = rollNo;
     }
-
-    public StudentDetails(final String name, final String email, final String schoolName, final String gender, final String rollNo) {
-        this.name = name;
-        this.schoolName = schoolName;
-        this.email = email;
-        this.gender = gender;
-        this.rollNo = rollNo;
-    }
-
-    public StudentDetails(){}
-
+    /**
+     *
+     * @return getting name
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     *
+     * @param name setting name
+      */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return getting email
+     */
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    /**
+     *
+     * @param email setting email
+     */
+    public void setEmail(final String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return getting gender
+     */
     public String getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    /**
+     *
+     * @param gender setting gender
+     */
+    public void setGender(final String gender) {
         this.gender = gender;
     }
 
+    /**
+     *
+     * @return getting school name
+     */
     public String getSchoolName() {
         return schoolName;
     }
 
-    public void setSchoolName(String schoolName) {
+    /**
+     *
+     * @param schoolName setting school name
+     */
+    public void setSchoolName(final String schoolName) {
         this.schoolName = schoolName;
     }
 
+    /**
+     *
+     * @return returns creater
+     */
     public static Creator<StudentDetails> getCREATOR() {
         return CREATOR;
     }
 
-    protected StudentDetails(Parcel in) {
-        name = in.readString();
-        email = in.readString();
-        gender = in.readString();
-        schoolName = in.readString();
-        rollNo = in.readString();
-    }
-
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeString(name);
         dest.writeString(email);
         dest.writeString(gender);
@@ -85,15 +160,5 @@ public class StudentDetails implements Parcelable {
         return 0;
     }
 
-    public static final Creator<StudentDetails> CREATOR = new Creator<StudentDetails>() {
-        @Override
-        public StudentDetails createFromParcel(Parcel in) {
-            return new StudentDetails(in);
-        }
 
-        @Override
-        public StudentDetails[] newArray(int size) {
-            return new StudentDetails[size];
-        }
-    };
 }

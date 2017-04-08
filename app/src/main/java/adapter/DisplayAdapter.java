@@ -1,30 +1,22 @@
 package adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.himanshu.studentmanagement.CreateStudentActivity;
-import com.example.himanshu.studentmanagement.MainScreenActivity;
 import com.example.himanshu.studentmanagement.R;
 
 import java.util.ArrayList;
 
 import model.StudentDetails;
-
-import static android.util.Log.*;
 
 /**
  * Created by himanshu on 5/4/17.
@@ -33,17 +25,21 @@ import static android.util.Log.*;
 public class DisplayAdapter extends android.support.v7.widget.RecyclerView.Adapter<DisplayAdapter.ViewHolder> {
 
 
-    Context context;
-    ArrayList<StudentDetails> studentDetaillist;
-    StudentDetails studentdetails;
+    private Context context;
+    private ArrayList<StudentDetails> studentDetaillist;
+    private StudentDetails studentdetails;
 
-    public DisplayAdapter(Context context, ArrayList<StudentDetails> studentDetaillist) {
+    /**
+     * @param context context
+     * @param studentDetaillist student arraylist
+     */
+    public DisplayAdapter(final Context context, final ArrayList<StudentDetails> studentDetaillist) {
         this.context = context;
         this.studentDetaillist = studentDetaillist;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         studentdetails = studentDetaillist.get(position);
 
         holder.tvName.setText(studentdetails.getName());
@@ -66,14 +62,24 @@ public class DisplayAdapter extends android.support.v7.widget.RecyclerView.Adapt
 
         View convertView = LayoutInflater.from(context).inflate(R.layout.customelayout, parent, false);
         ViewHolder viewHolder = new ViewHolder(convertView);
+        /**
+         * return view holder
+         */
         return viewHolder;
     }
 
 
+    /**
+     * view holder
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvName, tvSchoolName, tvEmail, tvGender, tvRollNo;
+        private TextView tvName, tvSchoolName, tvEmail, tvGender, tvRollNo;
 
+        /**
+         *
+         * @param itemView itemm view
+         */
         public ViewHolder(final View itemView) {
             super(itemView);
             tvEmail = (TextView) itemView.findViewById(R.id.tv_Email);
@@ -91,15 +97,15 @@ public class DisplayAdapter extends android.support.v7.widget.RecyclerView.Adapt
                         dialogbox.setTitle("Select option :");
                         dialogbox.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.d("my", "Delete");
+                            public void onClick(final DialogInterface dialog, final int which) {
+
                             }
 
                         });
 
                         dialogbox.setNegativeButton("View", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(final DialogInterface dialog, final int which) {
                                 Intent intent = new Intent(context, CreateStudentActivity.class);
                                 intent.putExtra("key", "view");
                                 intent.putExtra("object", studentDetaillist.get(pos));
@@ -110,11 +116,11 @@ public class DisplayAdapter extends android.support.v7.widget.RecyclerView.Adapt
 
                         dialogbox.setNeutralButton("Edit", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(final DialogInterface dialog, final int which) {
                                 Intent intent = new Intent(context, CreateStudentActivity.class);
                                 intent.putExtra("object", studentDetaillist.get(pos));
-                                intent.putExtra("key","edit");
-                                intent.putExtra("pos",pos);
+                                intent.putExtra("key", "edit");
+                                intent.putExtra("pos", pos);
                                 ((Activity) context).startActivityForResult(intent, 2);
 
                             }
